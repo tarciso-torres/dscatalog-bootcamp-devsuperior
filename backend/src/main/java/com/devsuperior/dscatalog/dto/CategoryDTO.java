@@ -13,6 +13,9 @@ public class CategoryDTO implements Serializable {
 		this.name = category.getName();
 	}
 
+	public CategoryDTO() {
+	}
+
 	private Long id;
 	private String name;
 
