@@ -17,7 +17,7 @@ class ProductRepositoryTest {
 	private ProductRepository repository;
 	
 	@Test
-	void shouldDeleObjectWhenIdExists() {
+	void shouldDeleteObjectWhenIdExists() {
 		
 		long existingId = 1l;
 		
@@ -26,6 +26,15 @@ class ProductRepositoryTest {
 		Optional<Product> result = repository.findById(existingId);
 		
 		Assertions.assertFalse(result.isPresent());
+	}
+	
+	@Test
+	void shouldThrowEmptyResultDataAccessExceptionWhenIdDoesNotExist() {
+		
+		Long nomExistingId = 1000l;
+		Assertions.assertThrows(EmptyResultDataAccessException.class, () -> {
+			repository.deleteById(nomExistingId);
+		});
 	}
 
 }
