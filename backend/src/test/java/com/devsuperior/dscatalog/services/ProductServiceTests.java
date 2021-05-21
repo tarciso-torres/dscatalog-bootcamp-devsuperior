@@ -35,6 +35,16 @@ public class ProductServiceTests {
 	}
 	
 	@Test
+	void shouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
+		
+		Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			service.delete(nonExistingId);
+		});
+		
+		Mockito.verify(repository, Mockito.times(1)).deleteById(nonExistingId);
+	}
+	
+	@Test
 	void shouldDoNothingWhenIdExists() {
 		
 		Assertions.assertDoesNotThrow(() -> {
