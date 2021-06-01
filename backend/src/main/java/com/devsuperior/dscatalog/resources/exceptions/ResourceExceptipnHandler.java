@@ -51,11 +51,10 @@ public class ResourceExceptipnHandler {
 		error.setError("Validation exception");
 		error.setMessage(e.getMessage());
 		error.setPath(request.getRequestURI());
-		
-//		for(FieldError f : e.getBindingResult().getFieldErrors()) {
-//			error.addError(f.getField(), null);
-//		}
-		e.getBindingResult().getFieldErrors().forEach(f -> error.addError(f.getField(), f.getDefaultMessage()));
+
+		e.getBindingResult()
+		.getFieldErrors()
+		.forEach(f -> error.addError(f.getField(), f.getDefaultMessage()));
 		
 		return ResponseEntity.status(status).body(error);
 	}
